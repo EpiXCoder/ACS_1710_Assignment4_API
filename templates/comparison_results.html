@@ -1,35 +1,55 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<section class="weather-form">
-    {# 
-        TODO: Replace the hard-coded cities and date below with data from the 
-        server.
-    #}
-    <h1>Weather in [CITY1] and [CITY2]</h1>
-    <p>[TODAYS_DATE]</p>
+<section class='weather-form'>
 
+    <h1>Comparing weather in {{city1_data['city']}} and {{city2_data['city']}}</h1>
+    <p>{{date}}</p>
 
-    {#
-        TODO: Add the temperature, description, and min & max temperature below.
-        Replace 'F' with the appropriate units.
-    #}
     <p>
-        It is [NUM_DEGREES] [UNITS] [WARMER/COLDER] in [CITY1] than in [CITY2] today.
+        It is {{temp_diff[0]}} º{{units_letter}} {{temp_diff[1]}} in {{city1_data['city']}} than in {{city2_data['city']}} today.
     </p>
 
     <p>
-        The humidity in [CITY1] is [AMOUNT] [GREATER/LESS] than in [CITY2].
+        The humidity in {{city1_data['city']}} is {{humidity_diff[0]}}% {{humidity_diff[1]}} than in {{city2_data['city']}}.
     </p>
 
     <p>
-        The wind speed in [CITY1] is [AMOUNT] [GREATER/LESS] than in [CITY2].
+        The wind speed in {{city1_data['city']}} is {{wind_diff[0]}} miles/hour {{wind_diff[1]}} than in {{city2_data['city']}}.
     </p>
 
     <p>
-        The sun sets in [CITY1] [HOURS] hours [EARLIER/LATER] than in [CITY2].
+        The sun sets in {{city1_data['city']}} {{sunset_diff[0]}} hours {{sunset_diff[1]}} than in {{city2_data['city']}}.
     </p>
     
+</section>
+<section>
+    <div class="individual-city">
+        <div id="city" >
+            <h2>Weather in {{city1_data['city']}} </h2>
+            <img src="{{city1_data['icon']}}"/>  <h1 id="big-temp">{{city1_data['temp']}} º{{units_letter}}</h1>
+            <ul>
+                <li>Temperature: {{city1_data['temp']}} º{{units_letter}} </li>
+                <li>Description: {{city1_data['description']}} </li>
+                <li>Humidity: {{city1_data['humidity']}}% </li>
+                <li>Wind speed: {{city1_data['wind_speed']}} miles/hour </li>
+                <li>Sunrise: {{city1_data['sunrise']}} </li>
+                <li>Sunset: {{city1_data['sunset']}} </li>
+            </ul>
+        </div>
+        <div id="city">
+            <h2>Weather in {{city2_data['city']}} </h2>
+            <img src="{{city1_data['icon']}}"/>  <span id="big-temp">{{city2_data['temp']}} º{{units_letter}} </span>
+            <ul>
+                <li>Temperature: {{city2_data['temp']}} º{{units_letter}} </li>
+                <li>Description: {{city2_data['description']}} </li>
+                <li>Humidity: {{city2_data['humidity']}}% </li>
+                <li>Wind speed: {{city2_data['wind_speed']}} miles/hour </li>
+                <li>Sunrise: {{city2_data['sunrise']}} </li>
+                <li>Sunset: {{city2_data['sunset']}} </li>
+            </ul>
+        </div>
+    </div>
 </section>
 
 {% endblock %}
